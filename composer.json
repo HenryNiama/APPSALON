@@ -1,0 +1,12 @@
+{
+    "name": "henry/appsalon",
+    "description": "Proyecto PHP 8, MVC, SQL, SASS y GULP",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Henry Niama Rodríguez",
+            "email": "48260750+HenryNiama@users.noreply.github.com"
+        }
+    ],
+    "require": {}
+}
