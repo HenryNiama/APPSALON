@@ -81,6 +81,11 @@ class Usuario extends ActiveRecord{
 
     }
 
+    public function hashPassword()
+    {
+        $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+    }
+
 }
 
 ?>

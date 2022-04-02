@@ -49,9 +49,15 @@ class LoginController{
                 //  Si ya existe un usuario registrado:
                 if ($resultado->num_rows) {
                     $alertas = Usuario::getAlertas(); // Llamo a las alertas
-                }else{
-                    // No esta registrado
-                    debuguear('No esta registrado..');
+
+                }else{// No esta registrado
+                    
+                    // hashear el Password
+                    $usuario->hashPassword();
+
+                    // Se obtiene el password hasheado
+                    debuguear($usuario);
+                    
                 }
                 
             }
