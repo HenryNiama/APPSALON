@@ -60,11 +60,10 @@ class LoginController{
                     $usuario->crearToken();
 
                     // Enviar el email
-                    $email = new Email($usuario->nombre, $usuario->email, $usuario->token);
-                    
-                    debuguear($email);
+                    $email = new Email($usuario->nombre, $usuario->email, $usuario->token); // Se crea el email
 
-
+                    $email->enviarConfirmacion();
+                                  
                     debuguear($usuario);
                     
                 }
