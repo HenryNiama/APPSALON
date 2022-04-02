@@ -44,6 +44,15 @@ class LoginController{
                 // echo "Pasaste la validación";
 
                 // Verificar que el usuario no este registrado
+                $resultado = $usuario->existeUsuario();
+
+                //  Si ya existe un usuario registrado:
+                if ($resultado->num_rows) {
+                    $alertas = Usuario::getAlertas(); // Llamo a las alertas
+                }else{
+                    // No esta registrado
+                    debuguear('No esta registrado..');
+                }
                 
             }
         }
