@@ -103,6 +103,11 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
+    public function comprobarPasswordAndVerificado()
+    {
+        
+    }
+
 }
 
 ?>
