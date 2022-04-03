@@ -107,7 +107,13 @@ class Usuario extends ActiveRecord{
     {
         $resultado = password_verify($password, $this->password);
 
-        debuguear($resultado);
+        if (!$resultado || !$this->confirmado) {
+            // No esta confirmado y su contrase;a  es incorrecta.
+            self::$alertas['error'][] = 'Password Incorrecto o tu cuenta no ha sido confirmada.';
+        }else{
+            // Si esta confirmado y su contrase;a es correcta
+            return true;
+        }
     }
 
 }

@@ -25,8 +25,11 @@ class LoginController{
                 $usuario = Usuario::where('email', $auth->email);
 
                 if ($usuario) {
-                    // Verificar el password
-                    $usuario->comprobarPasswordAndVerificado($auth->password);
+                    // Verificar el password y si esta verificado
+                    if ($usuario->comprobarPasswordAndVerificado($auth->password));{
+                                
+                    }
+
                 }else{
                     Usuario::setAlerta('error', 'Usuario NO Encontrado.');
                 }
