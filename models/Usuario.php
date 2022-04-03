@@ -78,7 +78,6 @@ class Usuario extends ActiveRecord{
         }
 
         return $resultado;
-
     }
 
     public function hashPassword()
@@ -89,6 +88,19 @@ class Usuario extends ActiveRecord{
     public function crearToken()
     {
         $this->token = uniqid(); // Genera una cadena de digitos aleatorios unica.
+    }
+
+    public function validarLogin()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        }
+
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El Password es Obligatorio';
+        }
+
+        return self::$alertas;
     }
 
 }
