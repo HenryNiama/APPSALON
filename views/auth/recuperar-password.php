@@ -3,7 +3,13 @@
 <p class="descripcion-pagina">Coloca tu nuevo password a continuación</p>
 
 
-<form  class="formulario" method="POST">
+<?php
+    include_once __DIR__ . "/../templates/alertas.php";
+?>
+
+<?php if($error) return; ?>
+
+<form  class="formulario" method="POST"> <?php // No se pone el action="/" porque borra el token de referencia al darle submit. ?>
     <div class="campo">
         <label for="password">Password</label>
         <input 
