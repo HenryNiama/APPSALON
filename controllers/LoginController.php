@@ -80,7 +80,11 @@ class LoginController{
                     $usuario->crearToken();
                     $usuario->guardar(); // Hace un Update en este registro en la base de datos
 
-                    // To-Do: Enviar el email
+                    // Enviar el email
+                    $email = new Email($usuario->email, $usuario->nombre, $usuario->token);
+                    $email->enviarInstrucciones();
+
+                    // Alerta de Exito
                     Usuario::setAlerta('exito', 'Revisa tu Email');
 
                 }else{
