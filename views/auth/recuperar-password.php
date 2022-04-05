@@ -17,6 +17,18 @@
             id="password"
             name="password"
             placeholder="Escribe tu nuevo Password"
+            required
+        />
+    </div>
+
+    <div class="campo">
+        <label for="passwordB">Confirmar Password</label>
+        <input 
+            type="password"
+            id="passwordB"
+            name="passwordB"
+            placeholder="Confirma tu Password"
+            required
         />
     </div>
 

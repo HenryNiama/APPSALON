@@ -111,6 +111,22 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
+    public function validarPassword($array = [])
+    {
+        if (!$this->password) {
+            self::$alertas['error'][] = 'El Password es Obligatorio';
+        }
+
+        if (strlen($this->password) < 6) {
+            self::$alertas['error'][] = 'El Password debe tener al menos 6 Caracteres';
+        }
+
+        if ($this->password !== $array['passwordB'] ) {
+            self::$alertas['error'][] = 'El Password no coincide';
+        }
+
+        return self::$alertas;
+    }
 
 
     public function comprobarPasswordAndVerificado($password)
