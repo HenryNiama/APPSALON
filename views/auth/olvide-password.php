@@ -2,6 +2,11 @@
 
 <p class="descripcion-pagina">Reestablece tu password escribiendo tu email a continuación.</p>
 
+<?php
+    include_once __DIR__ . "/../templates/alertas.php";
+?>
+
+
 <form action="/forget" class="formulario" method="POST">
     <div class="campo">
         <label for="email">E-mail: </label>

@@ -103,6 +103,16 @@ class Usuario extends ActiveRecord{
         return self::$alertas;
     }
 
+    public function validarEmail()
+    {
+        if (!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        }
+        return self::$alertas;
+    }
+
+
+
     public function comprobarPasswordAndVerificado($password)
     {
         $resultado = password_verify($password, $this->password);
