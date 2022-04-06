@@ -57,7 +57,7 @@
             <p class="text-center">Verifica que la información sea correcta</p>
     </div>
 
-    
+
         <div class="paginacion">
                 <button
                         id="anterior"
@@ -71,3 +71,13 @@
         </div>
 
 </div>
+
+
+<?php
+
+        $script = "
+                <script src='build/js/app.js'></script>
+        ";
+
+?>
+
