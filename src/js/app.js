@@ -1,9 +1,15 @@
 let paso = 1;
 
+const pasoInicial = 1; // Valor inicial de primer paginador o dato.
+const pasoFinal = 3; // Valor final del ultimo paginador o dato.
+
+
 document.addEventListener('DOMContentLoaded', function () {
     mostrarSeccion(); // Llamo la funcion para que por defecto se muestre una seccion al cargar la pagina
     iniciarApp();
     botonesPaginador(); // Agrega o quita los botones del paginador
+    paginaSiguiente();
+    paginaAnterior();
 });
 
 
@@ -71,4 +77,32 @@ switch (paso) {
         break;
 }
 
+    mostrarSeccion();
+
+}
+
+
+function paginaAnterior() {
+    const paginaAnterior = document.querySelector('#anterior');
+
+    paginaAnterior.addEventListener('click', function () {
+        if ( paso <= pasoInicial )  return; // Si es igual al pasoInicial, entonces se queda hasta ahi.
+
+        paso--;
+
+        botonesPaginador();
+    });
+
+}
+
+function paginaSiguiente() {
+    const paginaSiguiente = document.querySelector('#siguiente');
+
+        paginaSiguiente.addEventListener('click', function () {
+        if (paso >= pasoFinal )  return; // Si es igual al pasoInicial, entonces se queda hasta ahi.
+
+        paso++;
+
+        botonesPaginador();
+    });
 }
