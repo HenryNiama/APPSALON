@@ -1,1 +1,1 @@
-alert("Hola");
+let paso=1;function iniciarApp(){tabs()}function tabs(){document.querySelectorAll(".tabs button").forEach(t=>{t.addEventListener("click",(function(t){paso=parseInt(t.target.dataset.paso),mostrarSeccion(paso)}))})}function mostrarSeccion(t){console.log("Mostrando seccion "+t)}document.addEventListener("DOMContentLoaded",(function(){iniciarApp()}));
