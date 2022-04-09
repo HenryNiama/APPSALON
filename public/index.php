@@ -7,6 +7,7 @@ use MVC\Router;
 
 use Controllers\LoginController;
 use Controllers\CitaController;
+use Controllers\APIController;
 
 
 $router = new Router();
@@ -37,6 +38,12 @@ $router->get('/mensaje', [LoginController::class, 'mensaje']);
 // AREA PRIVADA
 $router->get('/cita', [CitaController::class, 'index']);
 
+
+
+// --------------------- API DE CITAS --------------------------------------
+
+//Primer endopoint: Lista todos los servicios que tenemos en la base de datos y la respuesta es en JSON
+$router->get('/api/servicios', [APIController::class, 'index']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
