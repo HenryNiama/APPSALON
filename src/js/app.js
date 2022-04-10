@@ -166,13 +166,24 @@ function mostrarServicios(servicios) {
 }
 
 function seleccionarServicio(servicio) {
-    // Extraigo la propiedad de 'servicios' del objeto de cita que cree arriba en variables
-    const {servicios} = cita;
-    cita.servicios = [...servicios, servicio];
-
-    const {id} = servicio;
-    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
-    divServicio.classList.add('seleccionado');
-
     
+    const {id} = servicio;
+    const {servicios} = cita;// Extraigo la propiedad de 'servicios' del objeto de cita que cree arriba en variables
+
+    // Identificar al elemento que se le da click.
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+
+    // Comprobar si un servicio ya fue agregado
+    if (servicios.some(agregado => agregado.id === id)) {// Compara entre el arreglo y el objeto de servicio seleccionado.
+        // Si ya esta agregado, vamos a eliminarlo del array de servicios del objeto de citas:
+        cita.servicios = servicios.filter(agregado => agregado.id !== id);
+        divServicio.classList.remove('seleccionado');
+    }else{
+        // Si no esta agregado, lo agregaremos.
+        cita.servicios = [...servicios, servicio];
+        divServicio.classList.add('seleccionado');
+    }
+
+    console.log(cita);
+
 }
