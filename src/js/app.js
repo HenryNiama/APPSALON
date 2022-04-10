@@ -168,8 +168,11 @@ function mostrarServicios(servicios) {
 function seleccionarServicio(servicio) {
     // Extraigo la propiedad de 'servicios' del objeto de cita que cree arriba en variables
     const {servicios} = cita;
-
     cita.servicios = [...servicios, servicio];
 
-    console.log(cita);
+    const {id} = servicio;
+    const divServicio = document.querySelector(`[data-id-servicio="${id}"]`);
+    divServicio.classList.add('seleccionado');
+
+    
 }

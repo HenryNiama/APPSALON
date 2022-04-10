@@ -35,5 +35,12 @@
             font-size: 3rem;
             margin: 0;
         }
+
+        &.seleccionado{
+            background-color: v.$azul;
+            p{
+                color:v.$blanco;
+            }
+        }
     }
 }
