@@ -1,17 +1,24 @@
+//---------------- VARIABLES ----------------------------------
+
 let paso = 1;
 
 const pasoInicial = 1; // Valor inicial de primer paginador o dato.
 const pasoFinal = 3; // Valor final del ultimo paginador o dato.
 
 
+// ---------------- EVENTOS ------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
     mostrarSeccion(); // Llamo la funcion para que por defecto se muestre una seccion al cargar la pagina
     iniciarApp();
     botonesPaginador(); // Agrega o quita los botones del paginador
     paginaSiguiente();
     paginaAnterior();
+
+    consultarAPI(); // Consulta la API en el backend de PHP
 });
 
+
+// ------------------ FUNCIONES -----------------------------------
 
 function iniciarApp() {
     tabs(); // Cambia la seccion cuando se presionen los tabs
@@ -105,4 +112,23 @@ function paginaSiguiente() {
 
         botonesPaginador();
     });
+}
+
+// Con esta funcion asincrona, puede arrancarse, y ejecutarse tambien otras funciones
+async function consultarAPI() {
+    try {
+        // URL que voy a consumir, la que tiene mi API:
+        const url = 'http://localhost:3000/api/servicios';
+
+        // Async y Await van de la mano, se usan al mismo tiempo y obligatoriamente para que funcione.
+        // El Await espera que se cargen todos mis registros, puede que sean 10K o m[as y este espera hasta que esten todos.
+        const resultado = await fetch(url); // Fetch va a consumir este servicio.
+
+        const servicios = await resultado.json();
+
+        console.log(resultado);
+        console.log(servicios);
+    } catch (error) {
+        
+    }
 }
