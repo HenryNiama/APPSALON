@@ -5,6 +5,12 @@ let paso = 1;
 const pasoInicial = 1; // Valor inicial de primer paginador o dato.
 const pasoFinal = 3; // Valor final del ultimo paginador o dato.
 
+const cita = {
+    nombre : '',
+    fecha: '',
+    hora: '',
+    servicios: []
+};
 
 // ---------------- EVENTOS ------------------------------------
 document.addEventListener('DOMContentLoaded', function () {
@@ -147,6 +153,9 @@ function mostrarServicios(servicios) {
         const servicioDiv = document.createElement('DIV');
         servicioDiv.classList.add('servicio');
         servicioDiv.dataset.idServicio = id;
+        servicioDiv.onclick = function () {
+            seleccionarServicio(servicio);
+        };
 
         servicioDiv.appendChild(nombreServicio);
         servicioDiv.appendChild(precioServicio);
@@ -154,4 +163,13 @@ function mostrarServicios(servicios) {
         // Agrego mi nuevo div al div de paso-1 con id de servicios que esta en el index de cita.
         document.querySelector('#servicios').appendChild(servicioDiv);
     });
+}
+
+function seleccionarServicio(servicio) {
+    // Extraigo la propiedad de 'servicios' del objeto de cita que cree arriba en variables
+    const {servicios} = cita;
+
+    cita.servicios = [...servicios, servicio];
+
+    console.log(cita);
 }
