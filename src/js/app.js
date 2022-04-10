@@ -124,11 +124,34 @@ async function consultarAPI() {
         // El Await espera que se cargen todos mis registros, puede que sean 10K o m[as y este espera hasta que esten todos.
         const resultado = await fetch(url); // Fetch va a consumir este servicio.
 
-        const servicios = await resultado.json();
+        const servicios = await resultado.json(); // Devuelve un array en JS de todos los servicios de la BD.
 
-        console.log(resultado);
-        console.log(servicios);
+        mostrarServicios(servicios);
     } catch (error) {
         
     }
+}
+
+function mostrarServicios(servicios) {
+    servicios.forEach(servicio => {
+        const{id, nombre, precio} = servicio;
+
+        const nombreServicio = document.createElement('P');
+        nombreServicio.classList.add('nombre-servicio');
+        nombreServicio.textContent = nombre;
+
+        const precioServicio = document.createElement('P');
+        precioServicio.classList.add('precio-servicio');
+        precioServicio.textContent = `$ ${precio}`;
+
+        const servicioDiv = document.createElement('DIV');
+        servicioDiv.classList.add('servicio');
+        servicioDiv.dataset.idServicio = id;
+
+        servicioDiv.appendChild(nombreServicio);
+        servicioDiv.appendChild(precioServicio);
+
+        // Agrego mi nuevo div al div de paso-1 con id de servicios que esta en el index de cita.
+        document.querySelector('#servicios').appendChild(servicioDiv);
+    });
 }
