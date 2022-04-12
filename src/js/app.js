@@ -22,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     consultarAPI(); // Consulta la API en el backend de PHP
 
-    nombreCliente();
+    nombreCliente(); // Anade el nombre del cliente al objeto de cita.
+    seleccionarFecha(); // Anade la fecha de la cita en el objeto
 });
 
 
@@ -192,4 +193,18 @@ function seleccionarServicio(servicio) {
 
 function nombreCliente() {
     cita.nombre = document.querySelector('#nombre').value;
+}
+
+function seleccionarFecha() {
+    const inputFecha = document.querySelector('#fecha');
+
+    inputFecha.addEventListener('input', function (e) {
+        const dia = new Date(e.target.value).getUTCDay();// Me devuelve un entero del numero del dia. Domingo es 0
+
+        if ([6,0].includes(dia)) {
+            e.target.value = '';
+        }else{ // Si es cualquier otro dia:
+            cita.fecha = e.target.value();// Guardamos la fecha escogida en el objeto
+        }
+    });
 }
