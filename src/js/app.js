@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', function () {
     paginaAnterior();
 
     consultarAPI(); // Consulta la API en el backend de PHP
+
+    nombreCliente();
 });
 
 
@@ -186,4 +188,8 @@ function seleccionarServicio(servicio) {
 
     console.log(cita);
 
+}
+
+function nombreCliente() {
+    cita.nombre = document.querySelector('#nombre').value;
 }
