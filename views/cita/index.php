@@ -37,6 +37,7 @@
                         <input 
                                 type="date"
                                 id="fecha"
+                                min="<?php echo date('Y-m-d', strtotime('+1 day')); //Puede ir 1 solo parametro tambien.?>"
                         />
                 </div>
                 <div class="campo">
