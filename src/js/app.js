@@ -203,8 +203,30 @@ function seleccionarFecha() {
 
         if ([6,0].includes(dia)) {
             e.target.value = '';
+            mostrarAlerta('Fines de Semana no Permitidos', 'error');
         }else{ // Si es cualquier otro dia:
             cita.fecha = e.target.value();// Guardamos la fecha escogida en el objeto
         }
     });
+}
+
+function mostrarAlerta(mensaje, tipo) {
+
+    // Previene que se genere mas de 1 alerta:
+    const alertaPrevia = document.querySelector('.alerta');
+    if(alertaPrevia) return; // Si ya existe una alerta previa, se sale, asi ya no crea mas.
+
+    // Creacion de alerta:
+    const alerta = document.createElement('DIV');
+    alerta.textContent = mensaje;
+    alerta.classList.add('alerta');
+    alerta.classList.add(tipo);
+
+    const formulario = document.querySelector('.formulario');
+    formulario.appendChild(alerta);
+
+    // Eliminacion de alerta:
+    setTimeout(() => {
+        alerta.remove();
+    }, 3000);
 }
