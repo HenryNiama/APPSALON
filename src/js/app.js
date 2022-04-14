@@ -207,7 +207,7 @@ function seleccionarFecha() {
         const dia = new Date(e.target.value).getUTCDay();// Me devuelve un entero del numero del dia. Domingo es 0
         if ([6,0].includes(dia)) {
             e.target.value = '';
-            mostrarAlerta('Fines de Semana no Permitidos', 'error');
+            mostrarAlerta('Fines de Semana no Permitidos', 'error', '.formulario');
         }else{ // Si es cualquier otro dia:
             cita.fecha = e.target.value;// Guardamos la fecha escogida en el objeto
         }
@@ -223,7 +223,7 @@ function seleccionarHora() {
         const hora = horaCita.split(":"); // Separa una cadena de texto, en los :, devuelve un array.
         
         if (hora[0] < 10 || hora[0] > 18) {
-            mostrarAlerta('Hora no Válida', 'error');
+            mostrarAlerta('Hora no Válida', 'error', '.formulario');
         }else{
             cita.hora = e.target.value;
         }       
@@ -231,11 +231,11 @@ function seleccionarHora() {
 }
 
 
-function mostrarAlerta(mensaje, tipo) {
+function mostrarAlerta(mensaje, tipo, elemento, desaparece = true) {
 
     // Previene que se genere mas de 1 alerta:
     const alertaPrevia = document.querySelector('.alerta');
-    if(alertaPrevia) return; // Si ya existe una alerta previa, se sale, asi ya no crea mas.
+    if(alertaPrevia) alertaPrevia.remove(); // Si ya existe una alerta previa, se sale, asi ya no crea mas.
 
     // Creacion de alerta:
     const alerta = document.createElement('DIV');
@@ -243,21 +243,25 @@ function mostrarAlerta(mensaje, tipo) {
     alerta.classList.add('alerta');
     alerta.classList.add(tipo);
 
-    const formulario = document.querySelector('.formulario');
-    formulario.appendChild(alerta);
+    const referencia = document.querySelector(elemento);
+    referencia.appendChild(alerta);
 
     // Eliminacion de alerta:
-    setTimeout(() => {
-        alerta.remove();
-    }, 3000);
+    if (desaparece) { // Si esta como true, eliminamos la alerta.
+        setTimeout(() => {
+            alerta.remove();
+        }, 3000); 
+    }
+
 }
 
 function mostrarResumen() {
     const resumen = document.querySelector('.contenido-resumen');
 
     // Si faltan valores en el objeto:
-    if (Object.values(cita).includes('')) {
-        console.log('Hace falta datos XD');
+    if (Object.values(cita).includes('') || cita.servicios.length === 0) {
+        // console.log('Hace falta datos XD');
+        mostrarAlerta('Faltan datos de Servicios, Fecha u Hora', 'error', '.contenido-resumen', false);
     }else{
         console.log('Todo Bien');
     }
