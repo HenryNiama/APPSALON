@@ -306,8 +306,20 @@ function mostrarResumen() {
     const nombreCliente = document.createElement('P');
     nombreCliente.innerHTML = `<span>Nombre: </span> ${nombre}`;
 
+    // Formatear la fecha en espa;ol
+    const fechaObj = new Date(fecha); // Cada que instancio el new Date() tengo un desfase de 1 dia.
+    const mes = fechaObj.getMonth(); // Devuelve el mes.
+    const dia = fechaObj.getDate() + 2; // Retorna el dia de la semana ya con el desfase.
+    const year = fechaObj.getFullYear(); // Retorna el a;o.
+
+    const fechaUTC = new Date(Date.UTC(year, mes, dia));
+
+    const opciones = {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'};
+    const fechaFormateada = fechaUTC.toLocaleDateString('es-ES', opciones);
+    
+
     const fechaCita = document.createElement('P');
-    fechaCita.innerHTML = `<span>Fecha: </span> ${fecha}`;
+    fechaCita.innerHTML = `<span>Fecha: </span> ${fechaFormateada}`;
 
     const horaCita = document.createElement('P');
     horaCita.innerHTML = `<span>Hora: </span> ${hora} horas`;
