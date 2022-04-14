@@ -25,6 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
     nombreCliente(); // Anade el nombre del cliente al objeto de cita.
     seleccionarFecha(); // Anade la fecha de la cita en el objeto.
     seleccionarHora(); // Anade la hora de la cita en el objeto.
+
+    mostrarResumen(); // Muestra el resumen de la cita.
 });
 
 
@@ -40,6 +42,7 @@ function tabs() {
 
     botones.forEach(boton => {
         boton.addEventListener('click', function (e) {
+            e.preventDefault();
             paso = parseInt(e.target.dataset.paso);
             mostrarSeccion(); // Muestra y oculta las secciones
             botonesPaginador();
@@ -85,6 +88,7 @@ switch (paso) {
     case 3:
         paginaAnterior.classList.remove('ocultar');
         paginaSiguiente.classList.add('ocultar');
+        mostrarResumen();
         break;
     case 2:
         paginaAnterior.classList.remove('ocultar');
@@ -201,12 +205,11 @@ function seleccionarFecha() {
 
     inputFecha.addEventListener('input', function (e) {
         const dia = new Date(e.target.value).getUTCDay();// Me devuelve un entero del numero del dia. Domingo es 0
-
         if ([6,0].includes(dia)) {
             e.target.value = '';
             mostrarAlerta('Fines de Semana no Permitidos', 'error');
         }else{ // Si es cualquier otro dia:
-            cita.fecha = e.target.value();// Guardamos la fecha escogida en el objeto
+            cita.fecha = e.target.value;// Guardamos la fecha escogida en el objeto
         }
     });
 }
@@ -215,14 +218,14 @@ function seleccionarHora() {
 
     const inputHora = document.querySelector('#hora');
 
-    inputHora.addEventListener('input', function (e) {
+    inputHora.addEventListener('input', function(e) {
         const horaCita = e.target.value; // Recupera la hora.
         const hora = horaCita.split(":"); // Separa una cadena de texto, en los :, devuelve un array.
-
-        if (hora < 10 || hora > 18) {
+        
+        if (hora[0] < 10 || hora[0] > 18) {
             mostrarAlerta('Hora no Válida', 'error');
         }else{
-            cita.hora = e.target.value();
+            cita.hora = e.target.value;
         }       
     });
 }
@@ -249,3 +252,13 @@ function mostrarAlerta(mensaje, tipo) {
     }, 3000);
 }
 
+function mostrarResumen() {
+    const resumen = document.querySelector('.contenido-resumen');
+
+    // Si faltan valores en el objeto:
+    if (Object.values(cita).includes('')) {
+        console.log('Hace falta datos XD');
+    }else{
+        console.log('Todo Bien');
+    }
+}
