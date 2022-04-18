@@ -44,7 +44,8 @@ $router->get('/cita', [CitaController::class, 'index']);
 
 //Primer endopoint: Lista todos los servicios que tenemos en la base de datos y la respuesta es en JSON
 $router->get('/api/servicios', [APIController::class, 'index']);
-
+// Registramos una URL que se encargue de leer los datos que enviamos mediante FormData
+$router->post('/api/citas', [APIController::class, 'guardar']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

@@ -16,6 +16,14 @@ class APIController{
         // debuguear($servicios);
     }
 
+    public static function guardar(){
+        $respuesta = [
+            'mensaje' => 'Todo OK.'
+        ]; // Un Arreglo asociativo es un objeto equivalente en JavaScript
+        
+        echo json_encode($respuesta);
+    }
+
 }
 
 ?>
