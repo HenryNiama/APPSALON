@@ -339,6 +339,11 @@ function mostrarResumen() {
     resumen.appendChild(botonReservar);
 }
 
+// Uso de FetchAPI
 function reservarCita() {
-    
+    // Creamos un objeto para enviarlo al servidor.
+    const datos = new FormData(); // Este FormData() va a actuar como un Submit pero con JavaScript
+    datos.append('nombre', 'juan');
+
+    // console.log([...datos]); // Para ver que lleva nuestro objeto de FormData, le pasamos una copia.
 }
