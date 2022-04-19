@@ -344,12 +344,14 @@ async function reservarCita() {
     // Creamos un objeto para enviarlo al servidor.
     const datos = new FormData(); // Este FormData() va a actuar como un Submit pero con JavaScript
     datos.append('nombre', 'juan');
+    datos.append('edad', 18);
 
     // Peticion hacia la api
     const url = 'http://localhost:3000/api/citas';
 
     const respuesta = await fetch(url, {
-        method: 'POST'
+        method: 'POST',
+        body: datos // Enviamos el objeto 'datos' que es el del FormData()
     });
 
     const resultado = await respuesta.json();

@@ -18,7 +18,7 @@ class APIController{
 
     public static function guardar(){
         $respuesta = [
-            'mensaje' => 'Todo OK.'
+            'datos' => $_POST
         ]; // Un Arreglo asociativo es un objeto equivalente en JavaScript
         
         echo json_encode($respuesta);
