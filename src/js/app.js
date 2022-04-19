@@ -340,10 +340,21 @@ function mostrarResumen() {
 }
 
 // Uso de FetchAPI
-function reservarCita() {
+async function reservarCita() {
     // Creamos un objeto para enviarlo al servidor.
     const datos = new FormData(); // Este FormData() va a actuar como un Submit pero con JavaScript
     datos.append('nombre', 'juan');
+
+    // Peticion hacia la api
+    const url = 'http://localhost:3000/api/citas';
+
+    const respuesta = await fetch(url, {
+        method: 'POST'
+    });
+
+    const resultado = await respuesta.json();
+
+    console.log(resultado);
 
     // console.log([...datos]); // Para ver que lleva nuestro objeto de FormData, le pasamos una copia.
 }
