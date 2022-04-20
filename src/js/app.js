@@ -341,11 +341,21 @@ function mostrarResumen() {
 
 // Uso de FetchAPI
 async function reservarCita() {
+
+    const {nombre, fecha, hora, servicios} = cita;
+
+    // Necesito recuperar los ids de los servicios seleccionados en forma de array:
+    const idServicios = servicios.map(servicio => servicio.id);
+
     // Creamos un objeto para enviarlo al servidor.
     const datos = new FormData(); // Este FormData() va a actuar como un Submit pero con JavaScript
-    datos.append('nombre', 'juan');
-    datos.append('edad', 18);
+    datos.append('nombre', nombre);
+    datos.append('fecha', fecha);
+    datos.append('hora', hora);
+    datos.append('servicios', idServicios);
 
+    // console.log([...datos]); 
+    
     // Peticion hacia la api
     const url = 'http://localhost:3000/api/citas';
 
