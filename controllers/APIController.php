@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Model\Servicio;
-
+use Model\Cita;
 
 class APIController{
     
@@ -17,11 +17,12 @@ class APIController{
     }
 
     public static function guardar(){
-        $respuesta = [
-            'datos' => $_POST
-        ]; // Un Arreglo asociativo es un objeto equivalente en JavaScript
         
-        echo json_encode($respuesta);
+        $cita = new Cita($_POST);
+
+        $resultado = $cita->guardar();
+     
+        echo json_encode($resultado);
     }
 
 }
