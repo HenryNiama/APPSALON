@@ -2,6 +2,9 @@
 
 <p class="descripcion-pagina">Elige tus servicios y coloca tus datos</p>
 
+<div class="barra">
+        <p>Hola: <?php echo $nombre ?? ''; ?></p>
+</div>
 
 <div id="app">
 
