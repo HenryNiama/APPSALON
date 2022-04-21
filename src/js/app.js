@@ -362,17 +362,41 @@ async function reservarCita() {
 
     // console.log([...datos]);  // Para ver que lleva nuestro objeto de FormData, le pasamos una copia.
      
-    // Peticion hacia la api
-    const url = 'http://localhost:3000/api/citas';
+    try {
+        // Peticion hacia la api
+        const url = 'http://localhost:3000/api/citas';
 
-    const respuesta = await fetch(url, {
+        const respuesta = await fetch(url, {
         method: 'POST',
         body: datos // Enviamos el objeto 'datos' que es el del FormData()
-    });
+        });
 
-    const resultado = await respuesta.json();
+        const resultado = await respuesta.json();
 
-    console.log(resultado);
+        console.log(resultado);
+
+        // Agregamos alerta de sweet Alerta (en el index de cita, ya se agrego el script al final.)
+        if (resultado.resultado) {// el .resultado proviene del metodo guardar() del ActiveRecord.
+            Swal.fire({
+                icon: 'success',
+                title: 'Cita Creada',
+                text: 'Tu Cita fue creada Correctamente!',
+                button: 'OK'
+            }).then(() =>{
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            })
+        }
+
+    } catch (error) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Hubo un Error al guardar la Cita'
+        })
+    }
+
 
     // console.log([...datos]); 
 }
