@@ -61,7 +61,15 @@ class LoginController{
     }
 
     public static function logout(){
-        echo "Desde LogOut";
+        session_start();
+
+        // debuguear($_SESSION);
+
+        $_SESSION = [];
+
+        header('Location: /');
+
+
     }
 
     public static function forget(Router $router){
