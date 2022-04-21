@@ -6,6 +6,7 @@ const pasoInicial = 1; // Valor inicial de primer paginador o dato.
 const pasoFinal = 3; // Valor final del ultimo paginador o dato.
 
 const cita = {
+    id: '',
     nombre : '',
     fecha: '',
     hora: '',
@@ -20,8 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
     paginaSiguiente();
     paginaAnterior();
 
-    consultarAPI(); // Consulta la API en el backend de PHP
+    consultarAPI(); // Consulta la API en el backend de PHP.
 
+    idCliente(); // Agrega el ID del Cliente al objeto de Cita.
     nombreCliente(); // Anade el nombre del cliente al objeto de cita.
     seleccionarFecha(); // Anade la fecha de la cita en el objeto.
     seleccionarHora(); // Anade la hora de la cita en el objeto.
@@ -196,6 +198,10 @@ function seleccionarServicio(servicio) {
 
 }
 
+function idCliente() {
+    cita.id = document.querySelector('#id').value;
+}
+
 function nombreCliente() {
     cita.nombre = document.querySelector('#nombre').value;
 }
@@ -342,20 +348,20 @@ function mostrarResumen() {
 // Uso de FetchAPI
 async function reservarCita() {
 
-    const {nombre, fecha, hora, servicios} = cita;
+    const {id, nombre, fecha, hora, servicios} = cita;
 
     // Necesito recuperar los ids de los servicios seleccionados en forma de array:
     const idServicios = servicios.map(servicio => servicio.id);
 
     // Creamos un objeto para enviarlo al servidor.
     const datos = new FormData(); // Este FormData() va a actuar como un Submit pero con JavaScript
-    datos.append('nombre', nombre);
+    datos.append('usuarioId', id);
     datos.append('fecha', fecha);
     datos.append('hora', hora);
-    datos.append('servicios', idServicios);
+    datos.append('servicios', idServicios); // Este lo ignora en el APIController
 
-    // console.log([...datos]); 
-    
+    // console.log([...datos]);  // Para ver que lleva nuestro objeto de FormData, le pasamos una copia.
+     
     // Peticion hacia la api
     const url = 'http://localhost:3000/api/citas';
 
@@ -368,5 +374,5 @@ async function reservarCita() {
 
     console.log(resultado);
 
-    // console.log([...datos]); // Para ver que lleva nuestro objeto de FormData, le pasamos una copia.
+    // console.log([...datos]); 
 }
