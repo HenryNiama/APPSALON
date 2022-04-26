@@ -1,4 +1,7 @@
 <?php
+// Esta clase, no es nigun modelo que exista en la base de datos, es mas bien el resultado de una consulta SQL
+// avanzada, en este caso, usamos JOINS por eso nace esta clase.
+
 
 namespace Model;
 

@@ -118,11 +118,20 @@ class ActiveRecord {
         return array_shift( $resultado ) ;
     }
 
-        // Busca un registro por su columna y valor
+    // Busca un registro por su columna y valor
     public static function where($columna, $valor) {
         $query = "SELECT * FROM " . static::$tabla  ." WHERE ${columna} = '${valor}'";
         $resultado = self::consultarSQL($query);
         return array_shift( $resultado ) ;
+    }
+
+    // Consulta Plana de SQL (Utilizar cuando los metodos del modelo no son suficientes.)
+    public static function SQL($consulta) {
+        $query = $consulta;
+        $resultado = self::consultarSQL($query);
+        // No retorno con array_shift($resultado) porque no quiero que me retorne solamente 1 resultado (el primero)
+        // si no, todos los resultados.
+        return  $resultado;
     }
 
     // Obtener Registros con cierta cantidad
