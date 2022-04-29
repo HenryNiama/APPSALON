@@ -9,8 +9,15 @@ class AdminController{
 
     public static function index(Router $router){
 
-        $fecha = date('Y-m-d');
+        // Si no hay un GET, genera la fecha del servidor con date()
+        $fecha = $_GET['fecha'] ?? date('Y-m-d'); // Trasemos la fecha de windows.location de JS.
+
+        $fechas = explode('-', $fecha); // Dividimos la fecha por medio del '-' y obtenemos un arreglo.
         
+        if (!checkdate($fechas[1], $fechas[2], $fechas[0])) {//CheckDate verifica por mes, dia y ano, que la fecha sea correcta.
+            // Si devuelve false, redirigimo a la siguiente pagina:
+            header('Location: /404');
+        }
 
         // Consultar la base de datos
         $consulta = "SELECT citas.id, citas.hora, CONCAT( usuarios.nombre, ' ', usuarios.apellido) as cliente, ";

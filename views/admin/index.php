@@ -21,6 +21,9 @@
 
 </div>
 
+<?php
+    if(count($citas) === 0) echo "<h2>No existen Citas en la Fecha seleccionada...</h2>";
+?>
 
 <div id="citas-admin">
     <ul class="citas">
