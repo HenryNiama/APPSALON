@@ -46,6 +46,20 @@ class APIController{
 
     }
 
+    public static function eliminar(){
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = $_POST['id'];
+            // debuguear($id);
+            $cita = Cita::find($id);
+            // debuguear($cita);
+            $cita->eliminar();
+
+            // Le decimos que nos reedireccione a la misma pagina de la que vino.
+            header('Location:' . $_SERVER['HTTP_REFERER']);
+        }
+    }
+
 }
 
 ?>
