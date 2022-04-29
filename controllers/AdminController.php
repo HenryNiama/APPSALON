@@ -9,6 +9,8 @@ class AdminController{
 
     public static function index(Router $router){
 
+        isAdmin();
+
         // Si no hay un GET, genera la fecha del servidor con date()
         $fecha = $_GET['fecha'] ?? date('Y-m-d'); // Trasemos la fecha de windows.location de JS.
 

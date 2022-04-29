@@ -48,7 +48,7 @@ $router->get('/admin', [AdminController::class, 'index']);
 $router->get('/api/servicios', [APIController::class, 'index']);
 // Registramos una URL que se encargue de leer los datos que enviamos mediante FormData
 $router->post('/api/citas', [APIController::class, 'guardar']);
-// Para eliminar una cita:
+// Para eliminar una cita segun la fecha:
 $router->post('/api/eliminar', [APIController::class, 'eliminar']);
 
 
