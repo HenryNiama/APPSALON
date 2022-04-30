@@ -19,3 +19,9 @@
 
     }
 }
+
+.servicios{
+    // Le decimos con SASS que herede todos los estilos de .citas
+    @extend .citas;
+
+}
