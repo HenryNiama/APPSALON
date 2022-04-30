@@ -11,6 +11,8 @@ class ServicioController {
 
         // session_start();
 
+        isAdmin();
+
         // Traemos todos los servicios de la base de datos.
         $servicios = Servicio::all(); // trae un arreglo de objetos
 
@@ -23,6 +25,8 @@ class ServicioController {
 
     public static function crear(Router $router){
         
+        isAdmin();
+
         $servicio = new Servicio; // Instancia Vacia
 
         $alertas = [];
@@ -49,6 +53,8 @@ class ServicioController {
     }
 
     public static function actualizar(Router $router){
+
+        isAdmin();
 
         // Validamos el Id que mandamos por la url sea numerico, debido que alguien puede mandar sentencias como
         // DELETE * FROM,  etc.
@@ -78,6 +84,8 @@ class ServicioController {
     }
 
     public static function eliminar(){
+
+        isAdmin();
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
