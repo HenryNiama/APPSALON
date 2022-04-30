@@ -52,17 +52,22 @@ class ServicioController {
 
         // Validamos el Id que mandamos por la url sea numerico, debido que alguien puede mandar sentencias como
         // DELETE * FROM,  etc.
-        $id = is_numeric($_GET['id']);
+    
+        if(!is_numeric($_GET['id'])) return; // En caso de que sea false, enviamos un return.
 
-        if(!$id) return; // En caso de que sea false, enviamos un return.
-
-        $servicio = Servicio::find($id); // Instancia Vacia
+        $servicio = Servicio::find($_GET['id']); // Instancia Vacia
 
         $alertas = [];
         
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
+            $servicio->sincronizar($_POST);
+            $alertas = $servicio->validar();
+
+            if(empty($alertas)){
+                $servicio->guardar();
+                header('Location: /servicios');
+            }
         }
 
         $router->render('servicios/actualizar', [
