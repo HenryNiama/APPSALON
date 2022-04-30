@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use MVC\Router;
+use Model\Servicio;
 
 class ServicioController {
 
@@ -17,12 +18,28 @@ class ServicioController {
 
     public static function crear(Router $router){
         
+        $servicio = new Servicio; // Instancia Vacia
+
+        $alertas = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            
+            // Sincronizamos el objeto que tenemos en memoria con los datos del POST, es decir
+            // los nuevos datos se asignan al objeto existente.
+            $servicio->sincronizar($_POST);
+
+            $alertas = $servicio->validar();
+
+            if (empty($alertas)) {
+                $servicio->guardar();
+                header('Location: /servicios');
+            }
+
         }
 
         $router->render('servicios/crear', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            'alertas' => $alertas
         ]);
     }
 
