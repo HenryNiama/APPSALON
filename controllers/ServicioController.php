@@ -49,13 +49,26 @@ class ServicioController {
     }
 
     public static function actualizar(Router $router){
+
+        // Validamos el Id que mandamos por la url sea numerico, debido que alguien puede mandar sentencias como
+        // DELETE * FROM,  etc.
+        $id = is_numeric($_GET['id']);
+
+        if(!$id) return; // En caso de que sea false, enviamos un return.
+
+        $servicio = Servicio::find($id); // Instancia Vacia
+
+        $alertas = [];
         
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
         }
 
         $router->render('servicios/actualizar', [
-            'nombre' => $_SESSION['nombre']
+            'nombre' => $_SESSION['nombre'],
+            'servicio' => $servicio,
+            'alertas' => $alertas
         ]);
     }
 
