@@ -24,4 +24,12 @@
     // Le decimos con SASS que herede todos los estilos de .citas
     @extend .citas;
 
+    .acciones{
+        margin: 0;
+    }
+    .boton,
+    .boton-eliminar{
+        margin: 0;
+    }
+
 }
